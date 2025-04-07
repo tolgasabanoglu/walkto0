@@ -1,0 +1,56 @@
+<!-- home.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Take Me to 0 - WalkTo0</title>
+    <script>
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    // Get the latitude and longitude
+                    var lat = position.coords.latitude;
+                    var lon = position.coords.longitude;
+
+                    // Set the values of the form fields
+                    document.getElementById("latitude").value = lat;
+                    document.getElementById("longitude").value = lon;
+                }, function() {
+                    alert("Geolocation not supported or permission denied!");
+                });
+            } else {
+                alert("Geolocation is not supported by this browser.");
+            }
+        }
+
+        // Call getLocation() when the page is loaded
+        window.onload = getLocation;
+    </script>
+</head>
+<body>
+    <h1>Take Me to 0</h1>
+
+    <h2>Your Current Location:</h2>
+    
+    {% if location %}
+        <p><strong>Latitude:</strong> {{ location['latitude'] }}</p>
+        <p><strong>Longitude:</strong> {{ location['longitude'] }}</p>
+    {% else %}
+        <p>Your location has not been set yet.</p>
+    {% endif %}
+
+    <h3>Set Your Location:</h3>
+    <form action="/location" method="POST">
+        <label for="latitude">Latitude:</label>
+        <input type="text" id="latitude" name="latitude" readonly required>
+        <br><br>
+        <label for="longitude">Longitude:</label>
+        <input type="text" id="longitude" name="longitude" readonly required>
+        <br><br>
+        <button type="submit">Set Location</button>
+    </form>
+
+</body>
+</html>

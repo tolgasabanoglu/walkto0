@@ -1,6 +1,6 @@
 from flask import Flask
 
 app = Flask(__name__)
+app.debug = True  # Enable debug mode to show detailed errors
 
-# Import routes so they get registered with the app
-from app import routes
+from app import routes  # Import routes after the app is created

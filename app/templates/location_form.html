@@ -1,0 +1,25 @@
+<!-- home.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+</head>
+<body>
+    <h1>Welcome to Your Homepage!</h1>
+
+    {% if location %}
+        <h2>Your Location:</h2>
+        <p>Latitude: {{ location['latitude'] }}</p>
+        <p>Longitude: {{ location['longitude'] }}</p>
+    {% else %}
+        <p>Your location is not yet set. Please visit <a href="/location">this page</a> to set your location.</p>
+    {% endif %}
+
+    <br><br>
+    <a href="/location">Enter Your Location</a>
+
+</body>
+</html>
